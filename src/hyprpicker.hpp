@@ -4,12 +4,13 @@
 #include "helpers/LayerSurface.hpp"
 #include "helpers/PoolBuffer.hpp"
 
-enum eOutputMode {
+enum eOutputMode : uint8_t {
     OUTPUT_CMYK = 0,
     OUTPUT_HEX,
     OUTPUT_RGB,
     OUTPUT_HSL,
-    OUTPUT_HSV
+    OUTPUT_HSV,
+    OUTPUT_POSITION
 };
 
 class CHyprpicker {

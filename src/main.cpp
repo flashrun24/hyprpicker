@@ -7,7 +7,7 @@
 static void help() {
     std::cout << "Hyprpicker usage: hyprpicker [arg [...]].\n\nArguments:\n"
               << " -a | --autocopy            | Automatically copies the output to the clipboard (requires wl-clipboard)\n"
-              << " -f | --format=fmt          | Specifies the output format (cmyk, hex, rgb, hsl, hsv)\n"
+              << " -f | --format=fmt          | Specifies the output format (cmyk, hex, rgb, hsl, hsv, position)\n"
               << " -n | --notify              | Sends a desktop notification when a color is picked (requires notify-send and a notification daemon like dunst)\n"
               << " -b | --no-fancy            | Disables the \"fancy\" (aka. colored) outputting\n"
               << " -h | --help                | Show this help message\n"
@@ -61,6 +61,8 @@ int main(int argc, char** argv, char** envp) {
                     g_pHyprpicker->m_bSelectedOutputMode = OUTPUT_HSL;
                 else if (strcasecmp(optarg, "hsv") == 0)
                     g_pHyprpicker->m_bSelectedOutputMode = OUTPUT_HSV;
+                else if (strcasecmp(optarg, "position") == 0)
+                    g_pHyprpicker->m_bSelectedOutputMode = OUTPUT_POSITION;
                 else {
                     Debug::log(NONE, "Unrecognized format %s", optarg);
                     exit(1);

@@ -463,6 +463,10 @@ void CHyprpicker::renderSurface(CLayerSurface* pSurface, bool forceInactive) {
                         previewBuffer = std::format("{}% {}% {}% {}%", c, m, y, k);
                         break;
                     };
+                    case OUTPUT_POSITION: {
+                        previewBuffer = std::format("{}, {}", std::floor(CLICKPOS.x), std::floor(CLICKPOS.y));
+                        break;
+                    };
                 };
                 cairo_set_source_rgba(PCAIRO, 0.0, 0.0, 0.0, 0.75);
 
@@ -748,6 +752,20 @@ void CHyprpicker::initMouse() {
 
                 if (m_bNotify)
                     NNotify::send(hexColor, formattedColor);
+
+                finish();
+                break;
+            }
+            case OUTPUT_POSITION: {
+                std::string formattedPosition = std::format("{}, {}", std::floor(CLICKPOS.x), std::floor(CLICKPOS.y));
+
+                Debug::log(NONE, formattedPosition.c_str());
+
+                if (m_bAutoCopy)
+                    NClipboard::copy(formattedPosition);
+
+                if (m_bNotify)
+                    NNotify::send(hexColor, formattedPosition);
 
                 finish();
                 break;
