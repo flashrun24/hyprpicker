@@ -47,7 +47,7 @@ CLayerSurface::CLayerSurface(SMonitor* pMonitor) : m_pMonitor(pMonitor) {
     pLayerSurface->sendSetAnchor((zwlrLayerSurfaceV1Anchor)(ZWLR_LAYER_SURFACE_V1_ANCHOR_TOP | ZWLR_LAYER_SURFACE_V1_ANCHOR_RIGHT | ZWLR_LAYER_SURFACE_V1_ANCHOR_BOTTOM |
                                                             ZWLR_LAYER_SURFACE_V1_ANCHOR_LEFT));
     pLayerSurface->sendSetExclusiveZone(-1);
-    pLayerSurface->sendSetKeyboardInteractivity(1);
+    pLayerSurface->sendSetKeyboardInteractivity(pLayerSurface->version() >= 4 ? 2 /* ON_DEMAND */ : 1 /* EXCLUSIVE */);
     pSurface->sendCommit();
 
     wl_display_flush(g_pHyprpicker->m_pWLDisplay);
